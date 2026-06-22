@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { oneLight, oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { useTheme } from '../context/ThemeContext'
-import { detectLanguage, LANG_LABEL } from '../utils/textFormatter'
+import { detectLanguage, LANG_LABEL, isMermaidCode } from '../utils/textFormatter'
+import MermaidDiagram from './MermaidDiagram'
 
 function CopyIcon() {
   return (
@@ -23,8 +24,14 @@ function CheckIcon() {
 export default function CodeBlock({ code }) {
   const { dark }           = useTheme()
   const [copied, setCopied] = useState(false)
-  const lang                = detectLanguage(code)
-  const label               = LANG_LABEL[lang] ?? 'Code'
+
+  // Route Mermaid diagram code to the dedicated renderer
+  if (isMermaidCode(code)) {
+    return <MermaidDiagram code={code} />
+  }
+
+  const lang  = detectLanguage(code)
+  const label = LANG_LABEL[lang] ?? 'Code'
 
   const handleCopy = () => {
     navigator.clipboard.writeText(code).then(() => {
@@ -71,4 +78,3 @@ export default function CodeBlock({ code }) {
     </div>
   )
 }
-

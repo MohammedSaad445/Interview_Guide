@@ -163,6 +163,16 @@ export function parseAnswerLines(text) {
 }
 
 /**
+ * Returns true if the code string is Mermaid diagram syntax.
+ * Detects all common Mermaid diagram types.
+ */
+export function isMermaidCode(code) {
+  if (!code) return false
+  const trimmed = code.trimStart()
+  return /^(graph\s+(TD|LR|RL|BT|TB)|flowchart\s+(TD|LR|RL|BT|TB|)|sequenceDiagram|classDiagram|stateDiagram(-v2)?|gantt|pie(\s+title)?|gitGraph|erDiagram|journey|quadrantChart)/i.test(trimmed)
+}
+
+/**
  * Simple language detection for the code-block label.
  */
 export function detectLanguage(code) {
