@@ -1,9 +1,9 @@
-package com.in28minutes.webscraper;
+package dev.saad.webscraper;
 
-import com.in28minutes.webscraper.json.JsonExporter;
-import com.in28minutes.webscraper.model.Book;
-import com.in28minutes.webscraper.pdf.PdfGenerator;
-import com.in28minutes.webscraper.scraper.WebScraper;
+import dev.saad.webscraper.json.JsonExporter;
+import dev.saad.webscraper.model.Book;
+import dev.saad.webscraper.pdf.PdfGenerator;
+import dev.saad.webscraper.scraper.WebScraper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

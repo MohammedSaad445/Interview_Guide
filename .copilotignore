@@ -1,0 +1,25 @@
+# ====================================================================
+# .copilotignore Template
+# To UNBLOCK a file/folder, just add a '#' to the beginning of its line
+# ====================================================================
+
+# Block massive compiled directories and build artifacts
+**/target/
+**/build/
+**/.gradle/
+**/node_modules/
+
+# Block heavy raw data and logs that drain credits instantly
+**/*.log
+**/*.csv
+**/*.json
+**/*.xml
+
+# Block heavy text/documentation folders
+**/docs/
+**/*.pdf
+**/*.md
+
+# Block specific heavy configuration or deployment directories
+**/.docker/
+**/kubernetes/

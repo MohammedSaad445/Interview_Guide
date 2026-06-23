@@ -1,12 +1,12 @@
-package com.in28minutes.webscraper.json;
+package dev.saad.webscraper.json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.in28minutes.webscraper.model.Book;
-import com.in28minutes.webscraper.model.QuestionAnswer;
-import com.in28minutes.webscraper.model.Section;
+import dev.saad.webscraper.model.Book;
+import dev.saad.webscraper.model.QuestionAnswer;
+import dev.saad.webscraper.model.Section;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

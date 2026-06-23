@@ -1,8 +1,8 @@
-package com.in28minutes.webscraper.pdf;
+package dev.saad.webscraper.pdf;
 
-import com.in28minutes.webscraper.model.Book;
-import com.in28minutes.webscraper.model.QuestionAnswer;
-import com.in28minutes.webscraper.model.Section;
+import dev.saad.webscraper.model.Book;
+import dev.saad.webscraper.model.QuestionAnswer;
+import dev.saad.webscraper.model.Section;
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.*;
 import org.slf4j.Logger;

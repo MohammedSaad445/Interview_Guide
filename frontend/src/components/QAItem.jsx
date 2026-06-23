@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import CodeBlock from './CodeBlock'
-import { parseAnswerLines } from '../utils/textFormatter'
+import { parseAnswerLines, isMermaidCode } from '../utils/textFormatter'
 
 function ChevronIcon({ open }) {
   return (
@@ -75,7 +75,7 @@ function TableSegment({ headers, rows }) {
             <tr key={ri}
               className={ri % 2 === 0
                 ? 'bg-white dark:bg-gray-800'
-                : 'bg-gray-50 dark:bg-gray-750'}>
+                : 'bg-gray-50 dark:bg-gray-700'}>
               {row.map((cell, ci) => (
                 <td key={ci}
                   className="px-3 py-2 text-gray-700 dark:text-gray-300
@@ -134,8 +134,13 @@ function AnswerSegments({ segments }) {
 export default function QAItem({ qa, qNum, defaultOpen = false }) {
   const [open, setOpen]  = useState(defaultOpen)
   const segments         = parseAnswerLines(qa.answer)
-  const hasCode          = qa.codeBlocks?.length > 0
-  const hasAnswer        = segments.length > 0 || hasCode
+
+  // Separate Mermaid diagram blocks from regular code blocks
+  const diagramCount = qa.codeBlocks?.filter(isMermaidCode).length ?? 0
+  const codeCount    = (qa.codeBlocks?.length ?? 0) - diagramCount
+  const hasCode      = codeCount > 0
+  const hasDiagrams  = diagramCount > 0
+  const hasAnswer    = segments.length > 0 || hasCode || hasDiagrams
 
   return (
     <div className={`bg-white dark:bg-gray-800 rounded-xl overflow-hidden
@@ -163,13 +168,26 @@ export default function QAItem({ qa, qNum, defaultOpen = false }) {
                         group-hover:text-accent transition-colors">
             {qa.question}
           </p>
+
+          {/* Diagram count badge */}
+          {hasDiagrams && (
+            <span className="mt-1 inline-flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500">
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                  d="M4 5h4v4H4V5zm12 0h4v4h-4V5zm-6 9h4v4h-4v-4zM6 9v3a3 3 0 003 3h2m4-6v3a3 3 0 01-3 3h-2" />
+              </svg>
+              {diagramCount} diagram{diagramCount > 1 ? 's' : ''}
+            </span>
+          )}
+
+          {/* Code example count badge */}
           {hasCode && (
             <span className="mt-1 inline-flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500">
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                   d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
               </svg>
-              {qa.codeBlocks.length} code example{qa.codeBlocks.length > 1 ? 's' : ''}
+              {codeCount} code example{codeCount > 1 ? 's' : ''}
             </span>
           )}
         </div>
@@ -187,7 +205,7 @@ export default function QAItem({ qa, qNum, defaultOpen = false }) {
               <div className="w-0.5 shrink-0 rounded-full bg-accent/30 self-stretch" />
               <div className="flex-1 space-y-3">
                 {segments.length > 0 && <AnswerSegments segments={segments} />}
-                {hasCode && (
+                {(hasCode || hasDiagrams) && (
                   <div className="space-y-2 mt-3">
                     {qa.codeBlocks.map((code, i) => (
                       <CodeBlock key={i} code={code} />
@@ -210,4 +228,3 @@ export default function QAItem({ qa, qNum, defaultOpen = false }) {
     </div>
   )
 }
-

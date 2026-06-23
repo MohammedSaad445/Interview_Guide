@@ -1,8 +1,8 @@
-package com.in28minutes.webscraper.scraper;
+package dev.saad.webscraper.scraper;
 
-import com.in28minutes.webscraper.model.Book;
-import com.in28minutes.webscraper.model.QuestionAnswer;
-import com.in28minutes.webscraper.model.Section;
+import dev.saad.webscraper.model.Book;
+import dev.saad.webscraper.model.QuestionAnswer;
+import dev.saad.webscraper.model.Section;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

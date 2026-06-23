@@ -1,4 +1,4 @@
-package com.in28minutes.webscraper.model;
+package dev.saad.webscraper.model;
 
 import java.util.ArrayList;
 import java.util.List;
