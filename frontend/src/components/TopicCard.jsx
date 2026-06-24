@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import { getTopicMeta } from '../utils/textFormatter'
 
+const basePath = import.meta.env.BASE_URL;
+
 function DownloadIcon() {
   return (
     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -65,10 +67,10 @@ export default function TopicCard({ topic }) {
           <span className="text-xs font-semibold text-accent group-hover:underline">
             Explore →
           </span>
-          {topic.pdfFile && hasData && (
-            <a
-              href={`/pdfs/${topic.pdfFile}`}
-              download
+           {topic.pdfFile && hasData && (
+             <a
+               href={`${basePath}pdfs/${topic.pdfFile}`}
+               download
               onClick={e => e.stopPropagation()}
               className="flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500
                          hover:text-accent transition-colors"

@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 
+const basePath = import.meta.env.BASE_URL;
+
 /**
  * Fetches /data/index.json – the list of all topic summaries.
  */
@@ -9,7 +11,7 @@ export function useIndex() {
   const [error, setError]     = useState(null)
 
   useEffect(() => {
-    fetch('./data/index.json')
+    fetch(`${basePath}data/index.json`)
       .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json() })
       .then(d  => { setData(d); setLoading(false) })
       .catch(e => { setError(e.message); setLoading(false) })
@@ -31,7 +33,7 @@ export function useTopic(slug) {
     setLoading(true)
     setData(null)
     setError(null)
-    fetch(`./data/${slug}.json`)
+    fetch(`${basePath}data/${slug}.json`)
       .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json() })
       .then(d  => { setData(d); setLoading(false) })
       .catch(e => { setError(e.message); setLoading(false) })
@@ -55,7 +57,7 @@ export function useAllTopics() {
 
     Promise.all(
       index.map(t =>
-        fetch(`./data/${t.slug}.json`)
+        fetch(`${basePath}data/${t.slug}.json`)
           .then(r => r.ok ? r.json() : null)
           .catch(() => null)
       )
@@ -67,4 +69,3 @@ export function useAllTopics() {
 
   return { allTopics, loading: indexLoading || loading }
 }
-
