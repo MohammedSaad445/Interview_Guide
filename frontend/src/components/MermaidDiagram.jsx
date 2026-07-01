@@ -3,21 +3,19 @@ import mermaid from 'mermaid'
 import { useTheme } from '../context/ThemeContext'
 
 /**
- * Renders a Mermaid diagram from raw diagram syntax (graph TD, sequenceDiagram, etc.).
- * Re-renders automatically when the app theme changes between light and dark.
- * Falls back to a plain <pre> if Mermaid throws a parse error.
+ * Renders a Mermaid diagram from raw diagram syntax.
+ * Re-renders when the theme changes. Falls back to a plain <pre> on parse errors.
  */
 export default function MermaidDiagram({ code }) {
   const { dark }            = useTheme()
   const containerRef        = useRef(null)
   const rawId               = useId()
-  // useId() can produce ":r0:" – strip non-alphanumeric for a valid HTML id
+  // useId() can produce ":r0:" — strip non-alphanumeric for a valid HTML id
   const diagramId           = 'mermaid-' + rawId.replace(/[^a-zA-Z0-9]/g, '')
   const [error, setError]   = useState(null)
   const [copied, setCopied] = useState(false)
 
   useEffect(() => {
-    // (Re-)initialise Mermaid whenever the theme flips
     mermaid.initialize({
       startOnLoad: false,
       theme: dark ? 'dark' : 'default',
@@ -33,22 +31,13 @@ export default function MermaidDiagram({ code }) {
           containerRef.current.innerHTML = svg
           const svgEl = containerRef.current.querySelector('svg')
           if (svgEl) {
-            // Ensure viewBox is present so aspect ratio is preserved when the
-            // diagram is scaled down in narrow viewports.
+            // Preserve aspect ratio on narrow viewports by ensuring viewBox is set
             if (!svgEl.getAttribute('viewBox')) {
               const w = parseFloat(svgEl.getAttribute('width')  || '0')
               const h = parseFloat(svgEl.getAttribute('height') || '0')
-              if (w > 0 && h > 0) {
-                svgEl.setAttribute('viewBox', `0 0 ${w} ${h}`)
-              }
+              if (w > 0 && h > 0) svgEl.setAttribute('viewBox', `0 0 ${w} ${h}`)
             }
-            // Do NOT override max-width here.
-            // Mermaid already writes style="max-width: Xpx;" on the SVG element,
-            // where X is the natural diagram width.  Overriding that with '100%'
-            // would cause narrow diagrams (e.g. simple 3-node flowcharts) to
-            // expand to fill the full container width, making them appear
-            // disproportionately large.  We only set height:auto so the height
-            // scales proportionally when the container is narrower than the diagram.
+            // height:auto lets the SVG scale proportionally; leave Mermaid's max-width intact
             svgEl.style.height  = 'auto'
             svgEl.style.display = 'block'
           }
@@ -72,7 +61,6 @@ export default function MermaidDiagram({ code }) {
     })
   }
 
-  // Error fallback – show the raw code with a warning banner
   if (error) {
     return (
       <div className="my-3 rounded-xl overflow-hidden border border-amber-200 dark:border-amber-700 text-sm shadow-sm">
@@ -92,8 +80,6 @@ export default function MermaidDiagram({ code }) {
 
   return (
     <div className="my-3 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-600 shadow-sm">
-
-      {/* ── Header bar ── */}
       <div className="flex items-center justify-between px-4 py-2
                       bg-gray-100 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
         <div className="flex items-center gap-2">
@@ -104,8 +90,7 @@ export default function MermaidDiagram({ code }) {
         </div>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-400
-                     hover:text-accent transition-colors"
+          className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-accent transition-colors"
           title="Copy diagram source"
         >
           {copied ? (
@@ -128,7 +113,6 @@ export default function MermaidDiagram({ code }) {
         </button>
       </div>
 
-      {/* ── Diagram body ── */}
       <div
         ref={containerRef}
         className="p-4 bg-white dark:bg-gray-800 overflow-x-auto flex justify-center"
@@ -136,6 +120,3 @@ export default function MermaidDiagram({ code }) {
     </div>
   )
 }
-
-
-

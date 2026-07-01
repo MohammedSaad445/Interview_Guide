@@ -10,14 +10,11 @@ export default function SectionCard({ section, topicSlug, index }) {
                       p-5 shadow-card hover:shadow-card-hover hover:-translate-y-0.5
                       transition-all duration-200">
         <div className="flex items-center gap-4">
-
-          {/* Number badge */}
           <div className={`w-9 h-9 rounded-lg bg-gradient-to-br ${meta.gradient} shrink-0
                            flex items-center justify-center text-white font-bold text-sm shadow-sm`}>
             {index + 1}
           </div>
 
-          {/* Title + count */}
           <div className="flex-1 min-w-0">
             <h3 className="font-semibold text-gray-900 dark:text-white group-hover:text-accent
                            transition-colors truncate text-sm leading-snug">
@@ -28,7 +25,6 @@ export default function SectionCard({ section, topicSlug, index }) {
             </p>
           </div>
 
-          {/* Arrow */}
           <svg className="w-4 h-4 text-gray-300 dark:text-gray-600 group-hover:text-accent
                            shrink-0 transition-colors"
             fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -39,4 +35,3 @@ export default function SectionCard({ section, topicSlug, index }) {
     </Link>
   )
 }
-

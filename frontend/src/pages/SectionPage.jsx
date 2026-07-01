@@ -5,7 +5,7 @@ import QAItem from '../components/QAItem'
 import { getTopicMeta } from '../utils/textFormatter'
 
 export default function SectionPage() {
-  const { slug, sectionSlug }   = useParams()
+  const { slug, sectionSlug }    = useParams()
   const { data: topic, loading } = useTopic(slug)
   const meta                     = getTopicMeta(slug)
   const [expandAll, setExpandAll] = useState(false)
@@ -36,14 +36,12 @@ export default function SectionPage() {
     )
   }
 
-  /* Adjacent section navigation */
   const sectionIndex = topic.sections.findIndex(s => s.slug === sectionSlug)
   const prevSection  = sectionIndex > 0 ? topic.sections[sectionIndex - 1] : null
   const nextSection  = sectionIndex < topic.sections.length - 1 ? topic.sections[sectionIndex + 1] : null
 
   return (
     <div>
-      {/* ── Section header ── */}
       <div className="bg-gradient-to-r from-navy to-navy-dark text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
@@ -74,10 +72,8 @@ export default function SectionPage() {
         </div>
       </div>
 
-      {/* ── Q&A content ── */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
-        {/* Controls row */}
         <div className="flex items-center justify-between mb-6">
           <p className="text-sm text-gray-500 dark:text-gray-400">
             Click any question to expand the answer
@@ -93,7 +89,6 @@ export default function SectionPage() {
           </div>
         </div>
 
-        {/* Q&A list */}
         <div className="space-y-3">
           {section.questionAnswers.map((qa, i) => (
             <QAItem key={i} qa={qa} qNum={i + 1} defaultOpen={expandAll} />
@@ -144,7 +139,6 @@ export default function SectionPage() {
           </div>
         </div>
 
-        {/* Back link */}
         <div className="mt-6 text-center">
           <Link
             to={`/topic/${slug}`}
@@ -157,4 +151,3 @@ export default function SectionPage() {
     </div>
   )
 }
-

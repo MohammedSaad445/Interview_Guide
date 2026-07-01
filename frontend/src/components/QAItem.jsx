@@ -13,8 +13,7 @@ function ChevronIcon({ open }) {
   )
 }
 
-/** Renders an image segment — shows the actual image if a URL is available,
- *  otherwise falls back to a styled caption-only block. */
+/** Renders an image — shows the actual image if a URL is available, otherwise a styled caption. */
 function ImageSegment({ label, src }) {
   const [errored, setErrored] = useState(false)
 
@@ -36,7 +35,6 @@ function ImageSegment({ label, src }) {
     )
   }
 
-  // Fallback when no URL or image failed to load
   return (
     <div className="my-3 flex items-center gap-2 rounded-lg border border-dashed border-gray-300
                     dark:border-gray-600 bg-gray-50 dark:bg-gray-800 px-4 py-3 text-sm
@@ -51,7 +49,7 @@ function ImageSegment({ label, src }) {
   )
 }
 
-/** Renders a table segment — headers in bold, body rows zebra-striped. */
+/** Renders a table — headers in bold, body rows zebra-striped. */
 function TableSegment({ headers, rows }) {
   if (!headers?.length && !rows?.length) return null
   return (
@@ -132,8 +130,8 @@ function AnswerSegments({ segments }) {
 }
 
 export default function QAItem({ qa, qNum, defaultOpen = false }) {
-  const [open, setOpen]  = useState(defaultOpen)
-  const segments         = parseAnswerLines(qa.answer)
+  const [open, setOpen] = useState(defaultOpen)
+  const segments        = parseAnswerLines(qa.answer)
 
   // Separate Mermaid diagram blocks from regular code blocks
   const diagramCount = qa.codeBlocks?.filter(isMermaidCode).length ?? 0
@@ -150,26 +148,22 @@ export default function QAItem({ qa, qNum, defaultOpen = false }) {
                        : 'border-gray-100 dark:border-gray-700 shadow-card hover:shadow-card-hover hover:border-gray-200 dark:hover:border-gray-600'
                      }`}>
 
-      {/* ── Question header ── */}
       <button
         className="w-full text-left flex items-start gap-3 px-5 py-4
                    hover:bg-gray-50 dark:hover:bg-gray-700/40 transition-colors group"
         onClick={() => setOpen(!open)}
       >
-        {/* Q badge */}
         <span className="shrink-0 w-7 h-7 rounded-lg bg-accent text-white text-xs font-bold
                          flex items-center justify-center mt-0.5 shadow-sm">
           {qNum}
         </span>
 
-        {/* Question text */}
         <div className="flex-1 min-w-0">
           <p className="font-semibold text-gray-900 dark:text-white text-sm leading-relaxed
                         group-hover:text-accent transition-colors">
             {qa.question}
           </p>
 
-          {/* Diagram count badge */}
           {hasDiagrams && (
             <span className="mt-1 inline-flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500">
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -180,7 +174,6 @@ export default function QAItem({ qa, qNum, defaultOpen = false }) {
             </span>
           )}
 
-          {/* Code example count badge */}
           {hasCode && (
             <span className="mt-1 inline-flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500">
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -195,12 +188,9 @@ export default function QAItem({ qa, qNum, defaultOpen = false }) {
         <ChevronIcon open={open} />
       </button>
 
-      {/* ── Answer body ── */}
       {open && hasAnswer && (
         <div className="border-t border-gray-100 dark:border-gray-700">
           <div className="px-5 pt-4 pb-5 bg-gray-50/70 dark:bg-gray-700/20 space-y-4">
-
-            {/* Left-bar accent */}
             <div className="flex gap-4">
               <div className="w-0.5 shrink-0 rounded-full bg-accent/30 self-stretch" />
               <div className="flex-1 space-y-3">
@@ -218,7 +208,6 @@ export default function QAItem({ qa, qNum, defaultOpen = false }) {
         </div>
       )}
 
-      {/* No answer state */}
       {open && !hasAnswer && (
         <div className="border-t border-gray-100 dark:border-gray-700 px-5 py-4 text-sm
                         text-gray-400 dark:text-gray-500 italic bg-gray-50 dark:bg-gray-700/20">

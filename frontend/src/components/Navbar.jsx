@@ -30,11 +30,11 @@ function SearchIcon({ className = 'w-4 h-4' }) {
 }
 
 export default function Navbar() {
-  const { dark, toggle }          = useTheme()
-  const [q, setQ]                 = useState('')
-  const [mobileOpen, setMobile]   = useState(false)
-  const navigate                  = useNavigate()
-  const location                  = useLocation()
+  const { dark, toggle }        = useTheme()
+  const [q, setQ]               = useState('')
+  const [mobileOpen, setMobile] = useState(false)
+  const navigate                = useNavigate()
+  const location                = useLocation()
 
   const handleSearch = (e) => {
     e.preventDefault()
@@ -48,7 +48,6 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center h-16 gap-4">
 
-          {/* ── Logo ── */}
           <Link to="/" className="flex items-center gap-2.5 shrink-0 mr-2">
             <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-white font-bold text-sm shadow-sm">
               IG
@@ -58,7 +57,6 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* ── Desktop topic links ── */}
           <div className="hidden lg:flex items-center gap-0.5 flex-1">
             {TOPICS.map(t => (
               <Link
@@ -75,7 +73,6 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* ── Search ── */}
           <form onSubmit={handleSearch} className="hidden md:block ml-auto">
             <div className="relative">
               <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -91,7 +88,6 @@ export default function Navbar() {
             </div>
           </form>
 
-          {/* ── Dark mode ── */}
           <button
             onClick={toggle}
             className="p-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-colors shrink-0"
@@ -100,7 +96,6 @@ export default function Navbar() {
             {dark ? <SunIcon /> : <MoonIcon />}
           </button>
 
-          {/* ── Mobile hamburger ── */}
           <button
             onClick={() => setMobile(!mobileOpen)}
             className="lg:hidden p-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-colors shrink-0"
@@ -114,7 +109,6 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* ── Mobile drawer ── */}
         {mobileOpen && (
           <div className="lg:hidden border-t border-white/10 py-4 space-y-4">
             <div className="grid grid-cols-2 gap-1">
@@ -152,4 +146,3 @@ export default function Navbar() {
     </nav>
   )
 }
-
