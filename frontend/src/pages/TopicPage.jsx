@@ -41,7 +41,6 @@ export default function TopicPage() {
 
   return (
     <div>
-      {/* ── Header ── */}
       <div className="bg-gradient-to-r from-navy to-navy-dark text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
@@ -55,7 +54,6 @@ export default function TopicPage() {
           </nav>
 
           <div className="flex flex-wrap items-start justify-between gap-6">
-            {/* Title block */}
             <div className="flex items-center gap-5">
               <div className={`w-16 h-16 rounded-2xl ${meta.iconBg} flex items-center justify-center text-3xl shadow-sm`}>
                 {meta.icon}
@@ -70,7 +68,6 @@ export default function TopicPage() {
               </div>
             </div>
 
-            {/* PDF download */}
             {topic.pdfFile && totalQ > 0 && (
               <a
                 href={`/pdfs/${topic.pdfFile}`}
@@ -89,7 +86,7 @@ export default function TopicPage() {
         </div>
       </div>
 
-      {/* ── Sections grid ── */}
+      {/* Sections grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {topic.sections.length === 0 ? (
           <div className="text-center py-16">
@@ -114,4 +111,3 @@ export default function TopicPage() {
     </div>
   )
 }
-

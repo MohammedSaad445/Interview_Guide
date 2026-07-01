@@ -31,23 +31,20 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* ═══════════════════════════════  HERO  ═══════════════════════════════ */}
+      {/* Hero */}
       <div className="relative bg-gradient-to-br from-navy via-navy-light to-[#0E2040] text-white overflow-hidden">
-        {/* Decorative circles */}
         <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-white/5 -translate-y-1/3 translate-x-1/3 pointer-events-none" />
         <div className="absolute bottom-0 left-0  w-64 h-64 rounded-full bg-white/5  translate-y-1/3 -translate-x-1/4 pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
           <div className="max-w-3xl mx-auto text-center">
 
-            {/* Eyebrow */}
             <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20
                              rounded-full px-4 py-1.5 text-sm text-blue-200 mb-6">
               <span className="w-2 h-2 rounded-full bg-teal animate-pulse" />
               Interview Preparation Series
             </div>
 
-            {/* Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-5 leading-tight tracking-tight">
               Master Your{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-light to-teal-light">
@@ -60,16 +57,14 @@ export default function HomePage() {
               everything you need to crack your next interview.
             </p>
 
-            {/* Stats row */}
             {hasData && (
               <div className="flex flex-wrap justify-center divide-x divide-white/20 mb-10">
-                <StatPill value={topics.length}   label="Topics"    />
-                <StatPill value={totalSections}   label="Sections"  />
-                <StatPill value={`${totalQAs}+`}  label="Q&As"      />
+                <StatPill value={topics.length}   label="Topics"   />
+                <StatPill value={totalSections}   label="Sections" />
+                <StatPill value={`${totalQAs}+`}  label="Q&As"     />
               </div>
             )}
 
-            {/* CTAs */}
             <div className="flex flex-wrap justify-center gap-3">
               <a href="#topics"
                 className="bg-accent hover:bg-accent-light text-white px-7 py-3 rounded-xl
@@ -85,14 +80,13 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Wave divider */}
         <svg viewBox="0 0 1440 56" className="block w-full" preserveAspectRatio="none" style={{ height: 56 }}>
           <path d="M0,56 L0,28 Q360,0 720,28 Q1080,56 1440,28 L1440,56 Z"
                 className="fill-gray-50 dark:fill-gray-950" />
         </svg>
       </div>
 
-      {/* ═══════════════════════════════  TOPICS GRID  ═══════════════════════ */}
+      {/* Topics grid */}
       <section id="topics" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="mb-10">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Choose a Topic</h2>
@@ -128,18 +122,18 @@ export default function HomePage() {
         )}
       </section>
 
-      {/* ═══════════════════════════════  HOW IT WORKS  ══════════════════════ */}
+      {/* How it works */}
       <section className="bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-10 text-center">
             How to use this guide
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
-            {[
-              { step: '01', title: 'Pick a Topic',    desc: 'Choose from Java, DevOps, Cloud, Docker, Kubernetes, Terraform, or Git.' },
-              { step: '02', title: 'Browse Sections', desc: 'Each topic is split into focused sections covering key interview areas.'  },
-              { step: '03', title: 'Study Q&As',      desc: 'Expand questions to read answers and study included code examples.'       },
-            ].map(({ step, title, desc }) => (
+            {([
+              { step: '01', title: 'Pick a Topic',     desc: 'Choose from Java, DevOps, Cloud, Docker, Kubernetes, Terraform, or Git.' },
+              { step: '02', title: 'Browse Sections',  desc: 'Each topic is split into focused sections covering key interview areas.'  },
+              { step: '03', title: 'Study Q&As',       desc: 'Expand questions to read answers and study included code examples.'       },
+            ]).map(({ step, title, desc }) => (
               <div key={step} className="text-center">
                 <div className="w-12 h-12 rounded-2xl bg-accent/10 dark:bg-accent/20 flex items-center
                                  justify-center text-accent font-extrabold text-lg mx-auto mb-4">

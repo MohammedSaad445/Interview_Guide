@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { getTopicMeta } from '../utils/textFormatter'
 
-const basePath = import.meta.env.BASE_URL;
+const basePath = import.meta.env.BASE_URL
 
 function DownloadIcon() {
   return (
@@ -23,13 +23,11 @@ export default function TopicCard({ topic }) {
                       shadow-card hover:shadow-card-hover hover:-translate-y-1
                       transition-all duration-250">
 
-        {/* Gradient top bar */}
         <div className={`h-1.5 w-full bg-gradient-to-r ${meta.gradient}`} />
 
         <div className="p-6">
-          {/* Icon row */}
           <div className="flex items-start justify-between mb-5">
-            <div className={`w-13 h-13 w-12 h-12 rounded-xl ${meta.iconBg} flex items-center justify-center text-2xl`}>
+            <div className={`w-12 h-12 rounded-xl ${meta.iconBg} flex items-center justify-center text-2xl`}>
               {meta.icon}
             </div>
             <svg className="w-5 h-5 text-gray-300 dark:text-gray-600 group-hover:text-accent transition-colors mt-1"
@@ -38,13 +36,11 @@ export default function TopicCard({ topic }) {
             </svg>
           </div>
 
-          {/* Title */}
           <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-0.5 group-hover:text-accent transition-colors">
             {topic.topicName}
           </h3>
           <p className="text-sm text-gray-400 dark:text-gray-500 mb-4">Interview Guide</p>
 
-          {/* Stats badges */}
           <div className="flex items-center gap-2 flex-wrap">
             {hasData ? (
               <>
@@ -61,16 +57,15 @@ export default function TopicCard({ topic }) {
           </div>
         </div>
 
-        {/* Card footer */}
         <div className="px-6 py-3 bg-gray-50 dark:bg-gray-700/40 border-t border-gray-100 dark:border-gray-700
                         flex items-center justify-between">
           <span className="text-xs font-semibold text-accent group-hover:underline">
             Explore →
           </span>
-           {topic.pdfFile && hasData && (
-             <a
-               href={`${basePath}pdfs/${topic.pdfFile}`}
-               download
+          {topic.pdfFile && hasData && (
+            <a
+              href={`${basePath}pdfs/${topic.pdfFile}`}
+              download
               onClick={e => e.stopPropagation()}
               className="flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500
                          hover:text-accent transition-colors"
@@ -84,4 +79,3 @@ export default function TopicCard({ topic }) {
     </Link>
   )
 }
-

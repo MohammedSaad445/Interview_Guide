@@ -20,10 +20,8 @@ export default function SearchPage() {
   const { allTopics, loading }          = useAllTopics()
   const [results, setResults]           = useState([])
 
-  /* Sync input when URL query changes (e.g. from navbar) */
   useEffect(() => { setInput(query) }, [query])
 
-  /* Run search whenever query or data changes */
   const runSearch = useCallback(() => {
     if (!query.trim() || allTopics.length === 0) { setResults([]); return }
     const q   = query.toLowerCase()
@@ -53,7 +51,6 @@ export default function SearchPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
-      {/* ── Page title ── */}
       <div className="mb-8">
         <h1 className="text-2xl font-extrabold text-gray-900 dark:text-white">Search Q&amp;As</h1>
         <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
@@ -61,7 +58,6 @@ export default function SearchPage() {
         </p>
       </div>
 
-      {/* ── Search form ── */}
       <form onSubmit={handleSubmit} className="flex gap-3 mb-8">
         <div className="flex-1 relative">
           <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none"
@@ -84,7 +80,6 @@ export default function SearchPage() {
         <button type="submit" className="btn-primary px-6">Search</button>
       </form>
 
-      {/* ── Loading ── */}
       {loading && (
         <div className="flex items-center gap-3 text-gray-500 dark:text-gray-400 py-4">
           <SpinnerIcon />
@@ -92,7 +87,6 @@ export default function SearchPage() {
         </div>
       )}
 
-      {/* ── Results summary ── */}
       {query && !loading && (
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-5">
           {results.length > 0
@@ -102,7 +96,6 @@ export default function SearchPage() {
         </p>
       )}
 
-      {/* ── No results illustration ── */}
       {query && !loading && results.length === 0 && (
         <div className="text-center py-16">
           <div className="text-6xl mb-4">🔍</div>
@@ -113,7 +106,6 @@ export default function SearchPage() {
         </div>
       )}
 
-      {/* ── Result cards ── */}
       {results.length > 0 && (
         <div className="space-y-5">
           {results.map(({ qa, section, topic }, i) => {
@@ -142,7 +134,6 @@ export default function SearchPage() {
         </div>
       )}
 
-      {/* ── Empty state ── */}
       {!query && !loading && (
         <div className="text-center py-16">
           <div className="text-6xl mb-4">💡</div>
@@ -157,4 +148,3 @@ export default function SearchPage() {
     </div>
   )
 }
-
